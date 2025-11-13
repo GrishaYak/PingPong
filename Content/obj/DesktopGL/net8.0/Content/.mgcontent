@@ -4,7 +4,7 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/projects/repos/Pong/Content/textures/atlas.png</File>
+    <File>D:/projects/csharp/PingPong/Content/textures/atlas.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

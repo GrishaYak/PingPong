@@ -1,0 +1,7 @@
+D:\projects\csharp\PingPong\obj\Debug\net8.0\mgcb.tool.restore
+D:\projects\csharp\PingPong\obj\Debug\net8.0\PingPong.csproj.AssemblyReference.cache
+D:\projects\csharp\PingPong\obj\Debug\net8.0\PingPong.GeneratedMSBuildEditorConfig.editorconfig
+D:\projects\csharp\PingPong\obj\Debug\net8.0\PingPong.AssemblyInfoInputs.cache
+D:\projects\csharp\PingPong\obj\Debug\net8.0\PingPong.AssemblyInfo.cs
+D:\projects\csharp\PingPong\obj\Debug\net8.0\PingPong.csproj.CoreCompileInputs.cache
+D:\projects\csharp\PingPong\obj\Debug\net8.0\PingPong.sourcelink.json

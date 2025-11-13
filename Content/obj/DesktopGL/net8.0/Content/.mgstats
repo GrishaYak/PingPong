@@ -1,1 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"D:/projects/csharp/PingPong/Content/textures/atlas.png","D:/projects/csharp/PingPong/Content/bin/DesktopGL/Content/textures/atlas.xnb","TextureProcessor","Texture2DContent",139,2325,0,122127

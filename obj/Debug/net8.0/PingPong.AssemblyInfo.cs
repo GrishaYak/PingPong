@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PingPong")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9b6103ec4d9e120140f0383d58409513f7e0324")]
 [assembly: System.Reflection.AssemblyProductAttribute("PingPong")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PingPong")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

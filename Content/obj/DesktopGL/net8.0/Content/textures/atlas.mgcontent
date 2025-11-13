@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>D:/projects/repos/Pong/Content/textures/atlas.png</SourceFile>
+  <SourceFile>D:/projects/csharp/PingPong/Content/textures/atlas.png</SourceFile>
   <SourceTime>2025-11-13T21:33:41.5505579+05:00</SourceTime>
-  <DestFile>D:/projects/repos/Pong/Content/bin/DesktopGL/Content/textures/atlas.xnb</DestFile>
-  <DestTime>2025-11-13T23:02:20.2687018+05:00</DestTime>
+  <DestFile>D:/projects/csharp/PingPong/Content/bin/DesktopGL/Content/textures/atlas.xnb</DestFile>
+  <DestTime>2025-11-14T00:26:19.1150063+05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-06-02T15:31:02+05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
