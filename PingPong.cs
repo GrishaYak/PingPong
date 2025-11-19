@@ -22,7 +22,7 @@ public class PingPong : Core
     protected override void LoadContent()
     {
         // TODO: use this.Content to load your game content here
-        TextureAtlas textureAtlas = TextureAtlas.FromFile(Content, "");
+
         base.LoadContent();
     }
 
