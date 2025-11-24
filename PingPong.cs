@@ -10,7 +10,7 @@ namespace PingPong;
 public class PingPong : Core
 {
     
-    public PingPong() : base("Ping Pong", 500, 700, false) { }
+    public PingPong() : base("Ping Pong", 900, 500, false) { }
 
     protected override void Initialize()
     {
