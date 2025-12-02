@@ -22,7 +22,7 @@ public class PingPong : Core
     protected override void LoadContent()
     {
         // TODO: use this.Content to load your game content here
-
+        
         base.LoadContent();
     }
 
@@ -43,7 +43,6 @@ public class PingPong : Core
         // TODO: Add your drawing code here
 
         SpriteBatch.Begin();
-
         SpriteBatch.End();
 
         base.Draw(gameTime);
