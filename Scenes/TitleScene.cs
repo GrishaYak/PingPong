@@ -14,7 +14,7 @@ namespace PingPong.Scenes
         private Label TITLE;
 
         private Font defaultFont;
-        private Font font5x;
+        private Font bigFont;
 
         public override void Initialize()
         {
@@ -26,16 +26,17 @@ namespace PingPong.Scenes
 
             TITLE = new Label("AeroPong");
             TITLE.Pos = _screen_reso * 0.5f + new Vector2(0, -50);
-            TITLE.Origin = font5x.MeasureString(TITLE.Text) * 0.5f;
+            TITLE.Origin = bigFont.MeasureString(TITLE.Text) * 0.5f;
+            bigFont.AddLabel(TITLE);
         }
 
         public override void LoadContent()
         {
             // Load the font for the standard text.
-            defaultFont.SpriteFont = Core.Content.Load<SpriteFont>("fonts/04B_30");
+            defaultFont = new Font(Core.Content.Load<SpriteFont>("fonts/04B_30"));
 
             // Load the font for the title text.
-            font5x.SpriteFont = Content.Load<SpriteFont>("fonts/04B_30_5x");
+            bigFont = new Font(Content.Load<SpriteFont>("fonts/04B_30_5x"));
         }
 
         public override void Update(GameTime gameTime)
@@ -45,10 +46,10 @@ namespace PingPong.Scenes
 
         public override void Draw(GameTime gameTime)
         {
-            Core.GraphicsDevice.Clear(Color.DarkSlateGray);
+            Core.GraphicsDevice.Clear(Color.Gray * 0.25f);
 
             Core.SpriteBatch.Begin();
-            font5x.Draw(Core.SpriteBatch);
+            bigFont.Draw(Core.SpriteBatch);
             Core.SpriteBatch.End();
             base.Draw(gameTime);
         }
