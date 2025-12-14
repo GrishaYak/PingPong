@@ -71,3 +71,9 @@ E:\projects\csharp\PingPong\obj\Debug\net8.0\refint\PingPong.dll
 E:\projects\csharp\PingPong\obj\Debug\net8.0\PingPong.pdb
 E:\projects\csharp\PingPong\obj\Debug\net8.0\PingPong.genruntimeconfig.cache
 E:\projects\csharp\PingPong\obj\Debug\net8.0\ref\PingPong.dll
+E:\projects\csharp\PingPong\bin\Debug\net8.0\Content\audio\click.xnb
+E:\projects\csharp\PingPong\bin\Debug\net8.0\GumCommon.dll
+E:\projects\csharp\PingPong\bin\Debug\net8.0\FlatRedBall.InterpolationCore.dll
+E:\projects\csharp\PingPong\bin\Debug\net8.0\MonoGameGum.dll
+E:\projects\csharp\PingPong\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\projects\csharp\PingPong\bin\Debug\net8.0\TextCopy.dll

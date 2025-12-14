@@ -4,12 +4,14 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>E:/projects/csharp/PingPong/Content/audio/click.wav</File>
     <File>E:/projects/csharp/PingPong/Content/fonts/04B_30_5x.spritefont</File>
     <File>E:/projects/csharp/PingPong/Content/fonts/04B_30.spritefont</File>
     <File>E:/projects/csharp/PingPong/Content/fonts/Standard.spritefont</File>
     <File>E:/projects/csharp/PingPong/Content/textures/atlas.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

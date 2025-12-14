@@ -2,6 +2,75 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "FlatRedBall.GumCommon/2025.8.3.3": {
+        "type": "package",
+        "dependencies": {
+          "FlatRedBall.InterpolationCore": "2025.4.22.1"
+        },
+        "compile": {
+          "lib/net6.0/GumCommon.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/GumCommon.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "FlatRedBall.InterpolationCore/2025.4.22.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/FlatRedBall.InterpolationCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/FlatRedBall.InterpolationCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
+      "Gum.MonoGame/2025.8.3.3": {
+        "type": "package",
+        "dependencies": {
+          "FlatRedBall.GumCommon": "2025.8.3.3",
+          "TextCopy": "6.2.1"
+        },
+        "compile": {
+          "lib/net6.0/MonoGameGum.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/MonoGameGum.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/7.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        }
+      },
       "MonoGame.Content.Builder.Task/3.8.4.1": {
         "type": "package",
         "build": {
@@ -108,10 +177,100 @@
             "related": ".xml"
           }
         }
+      },
+      "TextCopy/6.2.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0"
+        },
+        "compile": {
+          "lib/net6.0/TextCopy.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/TextCopy.dll": {
+            "related": ".xml"
+          }
+        }
       }
     }
   },
   "libraries": {
+    "FlatRedBall.GumCommon/2025.8.3.3": {
+      "sha512": "2r93e6rb+eoGnyDLR/GqBWSzFujgqPl9wIlFmrndr7W9K/3crOwcWz/TKDEP9YGgVqfFq+XiyYvQvBmMKo77jA==",
+      "type": "package",
+      "path": "flatredball.gumcommon/2025.8.3.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "flatredball.gumcommon.2025.8.3.3.nupkg.sha512",
+        "flatredball.gumcommon.nuspec",
+        "lib/net6.0/GumCommon.dll",
+        "lib/net6.0/GumCommon.xml",
+        "lib/netstandard2.0/GumCommon.dll",
+        "lib/netstandard2.0/GumCommon.xml"
+      ]
+    },
+    "FlatRedBall.InterpolationCore/2025.4.22.1": {
+      "sha512": "x95teSPBlV88KKbivY+peQ8AjqfXFgmGFnHw4Adds8UaO81zJKZAZZrXeetp5K+5mgd4t2hdtW4ItBFJ7ZwWig==",
+      "type": "package",
+      "path": "flatredball.interpolationcore/2025.4.22.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/InfoAboutProject.txt",
+        "contentFiles/any/netstandard2.0/InfoAboutProject.txt",
+        "flatredball.interpolationcore.2025.4.22.1.nupkg.sha512",
+        "flatredball.interpolationcore.nuspec",
+        "lib/netstandard2.0/FlatRedBall.InterpolationCore.dll",
+        "lib/netstandard2.0/FlatRedBall.InterpolationCore.xml"
+      ]
+    },
+    "Gum.MonoGame/2025.8.3.3": {
+      "sha512": "fj3IGafr8SwhfKyOU1DYXI6lUpDWr1Vq0nJWRYn1s8vyqcN02Yazq4B8YKpPr0B9UfZBdNcObKf1NvCqTm2KlA==",
+      "type": "package",
+      "path": "gum.monogame/2025.8.3.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "gum.monogame.2025.8.3.3.nupkg.sha512",
+        "gum.monogame.nuspec",
+        "lib/net6.0/MonoGameGum.dll",
+        "lib/net6.0/MonoGameGum.xml",
+        "lib/net8.0-ios18.0/MonoGameGum.dll",
+        "lib/net8.0-ios18.0/MonoGameGum.xml"
+      ]
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/7.0.0": {
+      "sha512": "h3j/QfmFN4S0w4C2A6X7arXij/M/OVw3uQHSOFxnND4DyAzO1F9eMX7Eti7lU/OkSthEE0WzRsfT/Dmx86jzCw==",
+      "type": "package",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/7.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/Microsoft.Extensions.DependencyInjection.Abstractions.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.Abstractions.targets",
+        "lib/net462/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/net462/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "lib/net7.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/net7.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+        "microsoft.extensions.dependencyinjection.abstractions.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "MonoGame.Content.Builder.Task/3.8.4.1": {
       "sha512": "jf6IZXMiOhuybRaWQt//u+804yzMRGk3ZRvlBJG/0iusRwTunJsQvA6tMMJJc7gjUrY6rUkzRqwinKWXugyHfA==",
       "type": "package",
@@ -199,10 +358,35 @@
         "nvorbis.0.10.4.nupkg.sha512",
         "nvorbis.nuspec"
       ]
+    },
+    "TextCopy/6.2.1": {
+      "sha512": "ryejViUBmHQ2XMie2AiRBn7KVKu2Gh/hqrctGSAUf1BufwfPjr+MWuACNBaiG+40TMbWRDJZgV73Tpl9hggeRw==",
+      "type": "package",
+      "path": "textcopy/6.2.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/monoandroid90/TextCopy.dll",
+        "lib/monoandroid90/TextCopy.xml",
+        "lib/net462/TextCopy.dll",
+        "lib/net462/TextCopy.xml",
+        "lib/net6.0/TextCopy.dll",
+        "lib/net6.0/TextCopy.xml",
+        "lib/netstandard2.0/TextCopy.dll",
+        "lib/netstandard2.0/TextCopy.xml",
+        "lib/netstandard2.1/TextCopy.dll",
+        "lib/netstandard2.1/TextCopy.xml",
+        "lib/xamarinios10/TextCopy.dll",
+        "lib/xamarinios10/TextCopy.xml",
+        "textcopy.6.2.1.nupkg.sha512",
+        "textcopy.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "Gum.MonoGame >= 2025.8.3.3",
       "MonoGame.Content.Builder.Task >= 3.8.*",
       "MonoGame.Framework.DesktopGL >= 3.8.*"
     ]
@@ -258,6 +442,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "Gum.MonoGame": {
+            "target": "Package",
+            "version": "[2025.8.3.3, )"
+          },
           "MonoGame.Content.Builder.Task": {
             "target": "Package",
             "version": "[3.8.*, )"

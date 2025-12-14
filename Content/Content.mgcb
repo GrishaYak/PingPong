@@ -13,6 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin audio/click.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/click.wav
+
 #begin fonts/04B_30_5x.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
