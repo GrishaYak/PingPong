@@ -187,10 +187,10 @@ namespace PingPong.Scenes
         public override void LoadContent()
         {
             // Load the font for the standard text.
-            defaultFont = new Font(Core.Content.Load<SpriteFont>("fonts/04B_30"));
+            defaultFont = new Font(Core.Content.Load<SpriteFont>("fonts/default"));
 
             // Load the font for the title text.
-            bigFont = new Font(Content.Load<SpriteFont>("fonts/04B_30_5x"));
+            bigFont = new Font(Content.Load<SpriteFont>("fonts/big"));
 
             // Load the sound effect to play when ui actions occur.
             _clickSoundEffect = Core.Content.Load<SoundEffect>("audio/click");

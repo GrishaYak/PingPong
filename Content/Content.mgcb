@@ -19,26 +19,19 @@
 /processorParam:Quality=Best
 /build:audio/click.wav
 
-#begin fonts/04B_30_5x.spritefont
+#begin fonts/big.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:fonts/04B_30_5x.spritefont
+/build:fonts/big.spritefont
 
-#begin fonts/04B_30.spritefont
+#begin fonts/default.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:fonts/04B_30.spritefont
-
-#begin fonts/Standard.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:fonts/Standard.spritefont
+/build:fonts/default.spritefont
 
 #begin textures/atlas.png
 /importer:TextureImporter
