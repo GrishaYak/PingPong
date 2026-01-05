@@ -26,6 +26,9 @@
 /processorParam:TextureFormat=Compressed
 /build:fonts/big.spritefont
 
+#begin fonts/default.fnt
+/copy:fonts/default.fnt
+
 #begin fonts/default.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -44,4 +47,7 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:textures/atlas.png
+
+#begin textures/atlas.xml
+/copy:textures/atlas.xml
 

@@ -9,6 +9,8 @@ using MonoGameGum;
 using Gum.Forms.Controls;
 using System;
 using Microsoft.Xna.Framework.Audio;
+using PingPong.UI;
+using MonoGameLib.Graphics;
 
 namespace PingPong.Scenes
 {
@@ -20,42 +22,45 @@ namespace PingPong.Scenes
 
         private Font defaultFont;
         private Font bigFont;
-        private SoundEffect _clickSoundEffect;
-        private Panel _titleScreenButtonsPanel;
-        private Panel _optionsPanel;
-        private Button _optionsButton;
-        private Button _optionsBackButton;
+
+        private string uiFont;
+        private SoundEffect clickSoundEffect;
+        private Panel titleScreenButtonsPanel;
+        private Panel optionsPanel;
+        private MyButton optionsButton;
+        private MyButton optionsBackButton;
+        private TextureAtlas atlas;
         
         private void CreateTitlePanel()
         {
-            _titleScreenButtonsPanel = new Panel();
-            _titleScreenButtonsPanel.Dock(Gum.Wireframe.Dock.Fill);
-            _titleScreenButtonsPanel.AddToRoot();
+            uiFont = "fonts/default.fnt";
 
-            var startButton = new Button();
+            titleScreenButtonsPanel = new Panel();
+            titleScreenButtonsPanel.Dock(Gum.Wireframe.Dock.Fill);
+            titleScreenButtonsPanel.AddToRoot();
+
+            var startButton = new MyButton(atlas, uiFont, text:"Start");
             startButton.Anchor(Gum.Wireframe.Anchor.BottomLeft);
             startButton.Visual.X = 20;
             startButton.Visual.Y = -20;
             startButton.Visual.Width = 50;
-            startButton.Text = "Start";
             startButton.Click += HandleStartClicked;
-            _titleScreenButtonsPanel.AddChild(startButton);
+            titleScreenButtonsPanel.AddChild(startButton);
 
-            _optionsButton = new Button();
-            _optionsButton.Anchor(Gum.Wireframe.Anchor.BottomRight);
-            _optionsButton.Visual.X = -20;
-            _optionsButton.Visual.Y = -20;
-            _optionsButton.Visual.Width = 50;
-            _optionsButton.Text = "Options";
-            _optionsButton.Click += HandleOptionsClicked;
-            _titleScreenButtonsPanel.AddChild(_optionsButton);
+            optionsButton = new MyButton(atlas, uiFont, text:"Options");
+            optionsButton.Anchor(Gum.Wireframe.Anchor.BottomRight);
+            optionsButton.Visual.X = -20;
+            optionsButton.Visual.Y = -20;
+            optionsButton.Visual.Width = 50;
+            optionsButton.Click += HandleOptionsClicked;
+            titleScreenButtonsPanel.AddChild(optionsButton);
 
             startButton.IsFocused = true;
         }
         private void HandleStartClicked(object sender, EventArgs e)
         {
             // A UI interaction occurred, play the sound effect
-            Core.Audio.PlaySoundEffect(_clickSoundEffect);
+            Core.Audio.PlaySoundEffect(clickSoundEffect);
 
             // Change to the game scene to start the game.
             Core.ChangeScene(new GameScene());
@@ -63,31 +68,38 @@ namespace PingPong.Scenes
         private void HandleOptionsClicked(object sender, EventArgs e)
         {
             // A UI interaction occurred, play the sound effect
-            Core.Audio.PlaySoundEffect(_clickSoundEffect);
+            Core.Audio.PlaySoundEffect(clickSoundEffect);
 
             // Set the title panel to be invisible.
-            _titleScreenButtonsPanel.IsVisible = false;
+            titleScreenButtonsPanel.IsVisible = false;
 
             // Set the options panel to be visible.
-            _optionsPanel.IsVisible = true;
+            optionsPanel.IsVisible = true;
 
             // Give the back button on the options panel focus.
-            _optionsBackButton.IsFocused = true;
+            optionsBackButton.IsFocused = true;
         }
         private void CreateOptionsPanel()
         {
-            _optionsPanel = new Panel();
-            _optionsPanel.Dock(Gum.Wireframe.Dock.Fill);
-            _optionsPanel.IsVisible = false;
-            _optionsPanel.AddToRoot();
+            optionsPanel = new Panel();
+            optionsPanel.Dock(Gum.Wireframe.Dock.Fill);
+            optionsPanel.IsVisible = false;
+            optionsPanel.AddToRoot();
 
-            var optionsText = new TextRuntime();
-            optionsText.X = 10;
-            optionsText.Y = 10;
-            optionsText.Text = "OPTIONS";
-            _optionsPanel.AddChild(optionsText);
 
-            var musicSlider = new Slider();
+            var optionsText = new TextRuntime
+            {
+                X = 10,
+                Y = 10,
+                Text = "OPTIONS",
+                UseCustomFont = true,
+                FontScale = 0.5f,
+                CustomFontFile = uiFont
+            };
+            optionsPanel.AddChild(optionsText);
+
+            var musicSlider = new OptionsSlider(atlas, uiFont, text:"MUSIC");
+            musicSlider.Name = "MusicSlider";
             musicSlider.Anchor(Gum.Wireframe.Anchor.Top);
             musicSlider.Visual.Y = 40;
             musicSlider.Minimum = 0;
@@ -97,9 +109,10 @@ namespace PingPong.Scenes
             musicSlider.LargeChange = .2;
             musicSlider.ValueChanged += HandleMusicSliderValueChanged;
             musicSlider.ValueChangeCompleted += HandleMusicSliderValueChangeCompleted;
-            _optionsPanel.AddChild(musicSlider);
+            optionsPanel.AddChild(musicSlider);
 
-            var sfxSlider = new Slider();
+            var sfxSlider = new OptionsSlider(atlas, uiFont, text:"SFX");
+            sfxSlider.Name = "SfxSlider";
             sfxSlider.Anchor(Gum.Wireframe.Anchor.Top);
             sfxSlider.Visual.Y = 70;
             sfxSlider.Minimum = 0;
@@ -109,15 +122,14 @@ namespace PingPong.Scenes
             sfxSlider.LargeChange = .2;
             sfxSlider.ValueChanged += HandleSfxSliderChanged;
             sfxSlider.ValueChangeCompleted += HandleSfxSliderChangeCompleted;
-            _optionsPanel.AddChild(sfxSlider);
+            optionsPanel.AddChild(sfxSlider);
 
-            _optionsBackButton = new Button();
-            _optionsBackButton.Text = "BACK";
-            _optionsBackButton.Anchor(Gum.Wireframe.Anchor.BottomRight);
-            _optionsBackButton.X = -20f;
-            _optionsBackButton.Y = -20f;
-            _optionsBackButton.Click += HandleOptionsButtonBack;
-            _optionsPanel.AddChild(_optionsBackButton);
+            optionsBackButton = new MyButton(atlas, "BACK");
+            optionsBackButton.Anchor(Gum.Wireframe.Anchor.BottomRight);
+            optionsBackButton.X = -20f;
+            optionsBackButton.Y = -20f;
+            optionsBackButton.Click += HandleOptionsButtonBack;
+            optionsPanel.AddChild(optionsBackButton);
         }
         private void HandleSfxSliderChanged(object sender, EventArgs args)
         {
@@ -128,7 +140,7 @@ namespace PingPong.Scenes
         }
         private void HandleSfxSliderChangeCompleted(object sender, EventArgs e)
         {
-            Core.Audio.PlaySoundEffect(_clickSoundEffect);
+            Core.Audio.PlaySoundEffect(clickSoundEffect);
         }
         private void HandleMusicSliderValueChanged(object sender, EventArgs args)
         {
@@ -145,18 +157,18 @@ namespace PingPong.Scenes
         private void HandleMusicSliderValueChangeCompleted(object sender, EventArgs args)
         {
             // A UI interaction occurred, play the sound effect
-            Core.Audio.PlaySoundEffect(_clickSoundEffect);
+            Core.Audio.PlaySoundEffect(clickSoundEffect);
         }
         private void HandleOptionsButtonBack(object sender, EventArgs e)
         {
             // A UI interaction occurred, play the sound effect
-            Core.Audio.PlaySoundEffect(_clickSoundEffect);
+            Core.Audio.PlaySoundEffect(clickSoundEffect);
 
-            _titleScreenButtonsPanel.IsVisible = true;
+            titleScreenButtonsPanel.IsVisible = true;
 
-            _optionsPanel.IsVisible = false;
+            optionsPanel.IsVisible = false;
 
-            _optionsButton.IsFocused = true;
+            optionsButton.IsFocused = true;
         }
         private void InitializeUI()
         {
@@ -193,7 +205,9 @@ namespace PingPong.Scenes
             bigFont = new Font(Content.Load<SpriteFont>("fonts/big"));
 
             // Load the sound effect to play when ui actions occur.
-            _clickSoundEffect = Core.Content.Load<SoundEffect>("audio/click");
+            clickSoundEffect = Core.Content.Load<SoundEffect>("audio/click");
+
+            atlas = TextureAtlas.FromFile(Core.Content, "textures/atlas.xml") ;
         }
 
         public override void Update(GameTime gameTime)
@@ -207,7 +221,7 @@ namespace PingPong.Scenes
 
             
             base.Draw(gameTime);
-            if (_titleScreenButtonsPanel.IsVisible)
+            if (titleScreenButtonsPanel.IsVisible)
             {
                 // Begin the sprite batch to prepare for rendering.
                 Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);

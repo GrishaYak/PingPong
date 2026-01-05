@@ -1,5 +1,7 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 "/home/grishayak/cs/projects/csharp/PingPong/Content/audio/click.wav","/home/grishayak/cs/projects/csharp/PingPong/Content/bin/DesktopGL/Content/audio/click.xnb","SoundEffectProcessor","SoundEffectContent",1869,1930,0.2042406
 "/home/grishayak/cs/projects/csharp/PingPong/Content/fonts/big.spritefont","/home/grishayak/cs/projects/csharp/PingPong/Content/bin/DesktopGL/Content/fonts/big.xnb","FontDescriptionProcessor","SpriteFontContent",2014,529434,0.3968615
+"/home/grishayak/cs/projects/csharp/PingPong/Content/fonts/default.fnt","/home/grishayak/cs/projects/csharp/PingPong/Content/bin/DesktopGL/Content/fonts/default.fnt","CopyItem","File",11042,11042,0.0002427
 "/home/grishayak/cs/projects/csharp/PingPong/Content/fonts/default.spritefont","/home/grishayak/cs/projects/csharp/PingPong/Content/bin/DesktopGL/Content/fonts/default.xnb","FontDescriptionProcessor","SpriteFontContent",2018,37914,0.0375113
-"/home/grishayak/cs/projects/csharp/PingPong/Content/textures/atlas.png","/home/grishayak/cs/projects/csharp/PingPong/Content/bin/DesktopGL/Content/textures/atlas.xnb","TextureProcessor","Texture2DContent",139,2325,0.014393
+"/home/grishayak/cs/projects/csharp/PingPong/Content/textures/atlas.png","/home/grishayak/cs/projects/csharp/PingPong/Content/bin/DesktopGL/Content/textures/atlas.xnb","TextureProcessor","Texture2DContent",1996,91733,0.0940037
+"/home/grishayak/cs/projects/csharp/PingPong/Content/textures/atlas.xml","/home/grishayak/cs/projects/csharp/PingPong/Content/bin/DesktopGL/Content/textures/atlas.xml","CopyItem","File",897,897,0.0002034
