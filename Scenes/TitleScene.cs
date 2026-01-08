@@ -11,6 +11,7 @@ using System;
 using Microsoft.Xna.Framework.Audio;
 using PingPong.UI;
 using MonoGameLib.Graphics;
+using static PingPong.Window;
 
 namespace PingPong.Scenes
 {
@@ -89,13 +90,14 @@ namespace PingPong.Scenes
 
             var optionsText = new TextRuntime
             {
-                X = 10,
-                Y = 10,
+                X = ScreenWidth / (BufferMultiplyer * 20),
+                Y = ScreenHeight / (BufferMultiplyer * 20),
                 Text = "OPTIONS",
                 UseCustomFont = true,
                 FontScale = 0.5f,
-                CustomFontFile = uiFont
-            };
+                CustomFontFile = uiFont,
+                Height = ScreenHeight << 3                
+            };            
             optionsPanel.AddChild(optionsText);
 
             var musicSlider = new OptionsSlider(atlas, uiFont, text:"MUSIC");
@@ -124,7 +126,7 @@ namespace PingPong.Scenes
             sfxSlider.ValueChangeCompleted += HandleSfxSliderChangeCompleted;
             optionsPanel.AddChild(sfxSlider);
 
-            optionsBackButton = new MyButton(atlas, "BACK");
+            optionsBackButton = new MyButton(atlas, uiFont, "BACK");
             optionsBackButton.Anchor(Gum.Wireframe.Anchor.BottomRight);
             optionsBackButton.X = -20f;
             optionsBackButton.Y = -20f;

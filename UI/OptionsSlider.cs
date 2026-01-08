@@ -40,7 +40,7 @@ public class OptionsSlider : Slider
             Width = 264f
         };
 
-        TextureRegion backgroundRegion = atlas.GetRegion("panel-background");
+        TextureRegion backgroundRegion = atlas.GetRegion("transparent");
 
         // Create the background panel that contains everything
         var background = backgroundRegion.GetNineSlice();
@@ -70,10 +70,10 @@ public class OptionsSlider : Slider
         };
         topLevelContainer.AddChild(innerContainer);
 
-        TextureRegion innerBackgroundRegion = atlas.GetRegion("inner-panel-background");
+        TextureRegion innerBackgroundRegion = atlas.GetRegion("transparent");
         var innerBackground = innerBackgroundRegion.GetNineSlice();
         innerBackground.Dock(Gum.Wireframe.Dock.Fill);
-        
+
         innerContainer.AddChild(innerBackground);
 
         TextureRegion offBackgroundRegion = atlas.GetRegion("slider-off");
