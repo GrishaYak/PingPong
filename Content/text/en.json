@@ -4,5 +4,6 @@
     "options.music":"Music",
     "options.sfx":"SFX",
     "menu.play":"Play",
-    "menu.options":"Options"
+    "menu.options":"Options",
+    "menu.title":"AeroPong"
 }

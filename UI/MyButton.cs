@@ -1,4 +1,6 @@
 using System;
+using System.Buffers;
+using System.Collections.Specialized;
 using Gum.DataTypes;
 using Gum.DataTypes.Variables;
 using Gum.Forms.Controls;
@@ -8,7 +10,8 @@ using Gum.Managers;
 using Microsoft.Xna.Framework.Input;
 using MonoGameGum.GueDeriving;
 using MonoGameLib.Graphics;
-using static MonoGameLib.Text.TextInst;
+using static MonoGameLib.Text.TextInstance;
+using static PingPong.Window;
 
 namespace PingPong.UI;
 
@@ -16,27 +19,40 @@ namespace PingPong.UI;
 public class MyButton : Button
 {
     /// <summary>
+    /// A scale that will be used on text when initializing new button 
+    /// </summary>
+    public static float TextScale { get; set; } = 0.25f;
+    public static float SizeMultiplyer {get; set;} = 1f;
+    private readonly float curSizeMultiplyer;
+    public float TextIndent {get;set;} = BufferMultiplyer * 4;
+
+    private readonly ButtonVisual buttonVisual;
+    private readonly string buttonText = "Replace Me";
+    private readonly float textScale;
+    private readonly string fontFile;
+    /// <summary>
     /// Creates a custom button visual.
     /// </summary>
     /// <param name="atlas">TextureAtlas with button's textures</param>
     /// <param name="text">Text on the button</param>
     /// <param name="unfocused">Name of the TextureRegion with unfocused button texture</param>
     /// <param name="focused">Name of the TextureRegion with focused button texture</param>
-    public MyButton(TextureAtlas atlas, string fontFile, string text="Replace Me", string unfocused="unfocused_btn", string focused="focused_btn")
+    public MyButton(TextureAtlas atlas, string givenFontFile, string text = "Replace Me", float? givenTextScale = null, float? sizeMultiplyer=null, string unfocused = "unfocused_btn", string focused = "focused_btn")
     {
-        var buttonVisual = (ButtonVisual)Visual;
-        buttonVisual.Height = 14f;
+        textScale = givenTextScale ?? TextScale;
+        fontFile = givenFontFile;
+        buttonText = text;
+        curSizeMultiplyer = sizeMultiplyer ?? SizeMultiplyer; 
+        buttonVisual = (ButtonVisual)Visual;
+        buttonVisual.Height = BufferHeight * 0.095f * curSizeMultiplyer;
         buttonVisual.HeightUnits = DimensionUnitType.Absolute;
-        buttonVisual.Width = 21f;
-        buttonVisual.WidthUnits = DimensionUnitType.RelativeToChildren;
-
+        VisualWidth = BufferWidth * 0.15f;
+        buttonVisual.WidthUnits = DimensionUnitType.Absolute;
 
         NineSliceRuntime background = buttonVisual.Background;
         background.Texture = atlas.Texture;
         background.TextureAddress = TextureAddress.Custom;
         background.Color = Microsoft.Xna.Framework.Color.White;
-
-        CreateTextInstance(buttonVisual.TextInstance, text, fontFile:fontFile);
 
         var unfocusedTextureRegion = atlas.GetRegion(unfocused);
         var unfocusedAnimation = new AnimationChain();
@@ -66,7 +82,7 @@ public class MyButton : Button
         };
         focusedAnimation.Add(focusedFrame);
 
-        background.AnimationChains = new AnimationChainList {unfocusedAnimation, focusedAnimation};
+        background.AnimationChains = new AnimationChainList { unfocusedAnimation, focusedAnimation };
         buttonVisual.ButtonCategory.ResetAllStates();
 
         StateSave enabledState = buttonVisual.States.Enabled;
@@ -86,6 +102,21 @@ public class MyButton : Button
         buttonVisual.RollOn += HandleRollOn;
     }
 
+    public float VisualWidth {get => buttonVisual.Width; set
+        {
+            SetProperties(buttonVisual.TextInstance, fontFile:fontFile);
+            float textWidth = buttonVisual.TextInstance.BitmapFont.MeasureString(buttonText) * textScale;
+            float ratio = 1;
+            if (textWidth > value - TextIndent)
+            {
+                ratio = (value - TextIndent) / textWidth;
+            }
+
+            buttonVisual.Width = value * curSizeMultiplyer;
+
+            SetProperties(buttonVisual.TextInstance, buttonText, fontFile: fontFile, scale: textScale * ratio * curSizeMultiplyer);
+        }
+    }
 
     /// <summary>
     /// Handles keyboard input for navigation between buttons using left/right keys.

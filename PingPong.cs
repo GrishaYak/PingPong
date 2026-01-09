@@ -2,13 +2,12 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGameLib;
-using MonoGameLib.Graphics;
-using MonoGameLib.Objects;
 using PingPong.Scenes;
 using Gum.Forms;
 using Gum.Forms.Controls;
 using MonoGameGum;
 using static PingPong.Window;
+using MonoGameLib.Text;
 
 namespace PingPong;
 
@@ -40,6 +39,7 @@ public class PingPong : Core
     protected override void Initialize()
     {
         base.Initialize();
+        TextManager.Load("en");
         InitializeGum();
         ChangeScene(new TitleScene());
     }

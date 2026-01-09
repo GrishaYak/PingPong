@@ -7,7 +7,7 @@ using Gum.Forms.Controls;
 using MonoGameGum.GueDeriving;
 using MonoGameLib.Graphics;
 using static PingPong.PingPong;
-using static MonoGameLib.Text.TextInst;
+using static MonoGameLib.Text.TextInstance;
 
 namespace PingPong.UI;
 
@@ -139,12 +139,12 @@ public class OptionsSlider : Slider
         trackInstance.AddChild(rangeSelect);
 
         // Add "OFF" text to the left end
-        TextRuntime offText = GetTextInstance(text: "OFF", color: colorText);
+        TextRuntime offText = CreateTextRuntime(text: "OFF", color: colorText);
         offText.Anchor(Gum.Wireframe.Anchor.Center);
         offBackground.AddChild(offText);
 
         // Add "MAX" text to the right end
-        TextRuntime maxText = GetTextInstance(text: "MAX", color: colorText);
+        TextRuntime maxText = CreateTextRuntime(text: "MAX", color: colorText);
         maxText.Anchor(Gum.Wireframe.Anchor.Center);
         maxBackground.AddChild(maxText);
 
