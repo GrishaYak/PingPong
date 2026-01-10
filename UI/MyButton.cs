@@ -21,8 +21,8 @@ public class MyButton : Button
     /// <summary>
     /// A scale that will be used on text when initializing new button 
     /// </summary>
-    public static float TextScale { get; set; } = 1f;
-    public static float SizeMultiplyer {get; set;} = 1f;
+    public static float TextScale { get; set; } = StandardFontScale;
+    public static float SizeMultiplyer { get; set; } = StandardSizeMultiplyer;
     private readonly float curSizeMultiplyer;
 
     private readonly ButtonVisual buttonVisual;
@@ -36,12 +36,12 @@ public class MyButton : Button
     /// <param name="text">Text on the button</param>
     /// <param name="unfocused">Name of the TextureRegion with unfocused button texture</param>
     /// <param name="focused">Name of the TextureRegion with focused button texture</param>
-    public MyButton(TextureAtlas atlas, string givenFontFile, string text = "Replace Me", float? givenTextScale = null, float? sizeMultiplyer=null, string unfocused = "unfocused_btn", string focused = "focused_btn")
+    public MyButton(TextureAtlas atlas, string customFontFile = null, string text = "Replace Me", float? customTextScale = null, float? sizeMultiplyer = null)
     {
-        textScale = givenTextScale ?? TextScale;
-        fontFile = givenFontFile;
+        textScale = customTextScale ?? TextScale;
+        fontFile = customFontFile ?? FontFile;
         buttonText = text;
-        curSizeMultiplyer = sizeMultiplyer ?? SizeMultiplyer; 
+        curSizeMultiplyer = sizeMultiplyer ?? SizeMultiplyer;
         buttonVisual = (ButtonVisual)Visual;
         buttonVisual.Height = Preferences.Button.Height * curSizeMultiplyer;
         buttonVisual.HeightUnits = DimensionUnitType.Absolute;
@@ -53,7 +53,7 @@ public class MyButton : Button
         background.TextureAddress = TextureAddress.Custom;
         background.Color = Microsoft.Xna.Framework.Color.White;
 
-        var unfocusedTextureRegion = atlas.GetRegion(unfocused);
+        var unfocusedTextureRegion = atlas.GetRegion(UnfocusedRegion);
         var unfocusedAnimation = new AnimationChain();
         unfocusedAnimation.Name = nameof(unfocusedAnimation);
         var unfocusedFrame = new AnimationFrame
@@ -67,7 +67,7 @@ public class MyButton : Button
         };
         unfocusedAnimation.Add(unfocusedFrame);
 
-        var focusedTextureRegion = atlas.GetRegion(focused);
+        var focusedTextureRegion = atlas.GetRegion(FocusedRegion);
         var focusedAnimation = new AnimationChain();
         unfocusedAnimation.Name = nameof(focusedAnimation);
         var focusedFrame = new AnimationFrame
@@ -101,9 +101,11 @@ public class MyButton : Button
         buttonVisual.RollOn += HandleRollOn;
     }
 
-    public float VisualWidth {get => buttonVisual.Width; set
+    public float VisualWidth
+    {
+        get => buttonVisual.Width; set
         {
-            SetProperties(buttonVisual.TextInstance, fontFile:fontFile);
+            SetProperties(buttonVisual.TextInstance, fontFile: fontFile);
             float textWidth = buttonVisual.TextInstance.BitmapFont.MeasureString(buttonText) * textScale;
             float ratio = 1;
             if (textWidth > value - TextIndent)

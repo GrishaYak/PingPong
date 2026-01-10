@@ -6,12 +6,13 @@ using Microsoft.Xna.Framework;
 using Gum.Forms.Controls;
 using MonoGameGum.GueDeriving;
 using MonoGameLib.Graphics;
-using static PingPong.PingPong;
+using static PingPong.UI.Preferences.SliderWithText;
 using static MonoGameLib.Text.TextInstance;
+using static PingPong.UI.Preferences.UniversalTextures;
 
 namespace PingPong.UI;
 
-public class OptionsSlider : Slider
+public class OptionsSlider : Gum.Forms.Controls.Slider
 {
     private TextRuntime textInstance;
     private ColoredRectangleRuntime rangeSelect;
@@ -29,18 +30,19 @@ public class OptionsSlider : Slider
     /// </summary>
     /// <param name="atlas">The texture atlas containing slider graphics.</param>
     /// <param name="text">The text, that will be placed near the slider.</param>
-    public OptionsSlider(TextureAtlas atlas, string fontFile, string text = "Replace Me", Color? _textColor = null)
+    public OptionsSlider(TextureAtlas atlas, string fontFile=null, string text = "Replace Me", Color? textColor = null)
     {
-        Color colorText = _textColor ?? Color.White;
+        fontFile ??= FontFile;
+        Color colorText = textColor ?? Color.White;
 
         // Create the top-level container for all visual elements
         var topLevelContainer = new ContainerRuntime
         {
-            Height = 55f,
-            Width = 264f
+            Height = TotalHeight,
+            Width = TotalWidth
         };
 
-        TextureRegion backgroundRegion = atlas.GetRegion("transparent");
+        TextureRegion backgroundRegion = atlas.GetRegion(Transparent);
 
         // Create the background panel that contains everything
         var background = backgroundRegion.GetNineSlice();
@@ -52,10 +54,10 @@ public class OptionsSlider : Slider
         {
             CustomFontFile = fontFile,
             UseCustomFont = true,
-            FontScale = 0.5f,
+            FontScale = FontScale,
             Text = text,
-            X = 10f,
-            Y = 10f,
+            X = TextX,
+            Y = TextY,
             WidthUnits = DimensionUnitType.RelativeToChildren
         };
         topLevelContainer.AddChild(textInstance);
@@ -68,6 +70,7 @@ public class OptionsSlider : Slider
             X = 10f,
             Y = 33f
         };
+
         topLevelContainer.AddChild(innerContainer);
 
         TextureRegion innerBackgroundRegion = atlas.GetRegion("transparent");

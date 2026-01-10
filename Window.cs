@@ -15,4 +15,16 @@ public static class Window
     /// </summary>
     public static float SymbolScreenHeightScale { get; } = BufferHeight / 26;
 
+    private static readonly float ratio = BufferHeight / SymbolScreenHeightScale;
+
+    /// <summary>
+    /// Returns size of a letter in pixels in buffer.
+    /// </summary>
+    /// <param name="fontScale"></param>
+    /// <returns></returns>
+    public static float GetFontSize(float fontScale)
+    {
+        return fontScale * ratio;
+    }
+
 }

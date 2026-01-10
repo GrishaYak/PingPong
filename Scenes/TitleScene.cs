@@ -18,22 +18,16 @@ namespace PingPong.Scenes
     public class TitleScene : Scene
     {
         private MonoLabel TITLE;
-
-        private Font defaultFont;
         private Font bigFont;
-
-        private string uiFont;
         private SoundEffect clickSoundEffect;
         private Panel titleScreenButtonsPanel;
         private Panel optionsPanel;
         private MyButton optionsButton;
         private MyButton optionsBackButton;
         private TextureAtlas atlas;
-        private float standardButtonTextScale; 
-        
+
         private void CreateTitlePanel()
         {
-            uiFont = "fonts/default.fnt";
             TextManager.SetParent("menu");
 
             TITLE = new MonoLabel(TextManager.Get("title"));
@@ -45,18 +39,18 @@ namespace PingPong.Scenes
             titleScreenButtonsPanel.Dock(Gum.Wireframe.Dock.Fill);
             titleScreenButtonsPanel.AddToRoot();
 
-            var startButton = new MyButton(atlas, uiFont, text:TextManager.Get("play"));
+            var startButton = new MyButton(atlas, text: TextManager.Get("play"));
             startButton.Anchor(Gum.Wireframe.Anchor.BottomLeft);
-            startButton.Visual.X = BufferWidth*0.125f;
-            startButton.Visual.Y = -BufferHeight*0.15f;
+            startButton.Visual.X = BufferWidth * 0.125f;
+            startButton.Visual.Y = -BufferHeight * 0.15f;
             startButton.Click += HandleStartClicked;
-            
+
             titleScreenButtonsPanel.AddChild(startButton);
 
-            optionsButton = new MyButton(atlas, uiFont, text:TextManager.Get("options"));
+            optionsButton = new MyButton(atlas, text: TextManager.Get("options"));
             optionsButton.Anchor(Gum.Wireframe.Anchor.BottomRight);
-            optionsButton.Visual.X = -BufferWidth*0.125f;
-            optionsButton.Visual.Y = -BufferHeight*0.15f;
+            optionsButton.Visual.X = -BufferWidth * 0.125f;
+            optionsButton.Visual.Y = -BufferHeight * 0.15f;
             optionsButton.Click += HandleOptionsClicked;
             titleScreenButtonsPanel.AddChild(optionsButton);
 
@@ -99,13 +93,13 @@ namespace PingPong.Scenes
                 Y = BufferHeight / 20,
                 Text = TextManager.Get("options"),
                 UseCustomFont = true,
-                FontScale = SymbolScreenHeightScale/10,
-                CustomFontFile = uiFont,
+                FontScale = SymbolScreenHeightScale / 10,
+                CustomFontFile = Preferences.Font.FontFile,
             };
-            
+
             optionsPanel.AddChild(optionsText);
 
-            var musicSlider = new OptionsSlider(atlas, uiFont, text:TextManager.Get("music"));
+            var musicSlider = new OptionsSlider(atlas, text: TextManager.Get("music"));
             musicSlider.Name = "MusicSlider";
             musicSlider.Anchor(Gum.Wireframe.Anchor.Top);
             musicSlider.Visual.Y = 40;
@@ -118,7 +112,7 @@ namespace PingPong.Scenes
             musicSlider.ValueChangeCompleted += HandleMusicSliderValueChangeCompleted;
             optionsPanel.AddChild(musicSlider);
 
-            var sfxSlider = new OptionsSlider(atlas, uiFont, text:TextManager.Get("sfx"));
+            var sfxSlider = new OptionsSlider(atlas, text: TextManager.Get("sfx"));
             sfxSlider.Name = "SfxSlider";
             sfxSlider.Anchor(Gum.Wireframe.Anchor.Top);
             sfxSlider.Visual.Y = 70;
@@ -131,7 +125,7 @@ namespace PingPong.Scenes
             sfxSlider.ValueChangeCompleted += HandleSfxSliderChangeCompleted;
             optionsPanel.AddChild(sfxSlider);
 
-            optionsBackButton = new MyButton(atlas, uiFont, text:TextManager.Get("back"));
+            optionsBackButton = new MyButton(atlas, text: TextManager.Get("back"));
             optionsBackButton.Anchor(Gum.Wireframe.Anchor.BottomRight);
             optionsBackButton.X = -20f;
             optionsBackButton.Y = -20f;
@@ -189,10 +183,6 @@ namespace PingPong.Scenes
         {
 
             Core.ExitOnEscape = true;
-            standardButtonTextScale = SymbolScreenHeightScale * 0.06f;
-            MyButton.TextScale = standardButtonTextScale;
-            MyButton.SizeMultiplyer = 1.1f;
-            // LoadContent is called during base.Initialize().
             base.Initialize();
 
             InitializeUI();
@@ -201,16 +191,13 @@ namespace PingPong.Scenes
 
         public override void LoadContent()
         {
-            // Load the font for the standard text.
-            defaultFont = new Font(Core.Content.Load<SpriteFont>("fonts/default"));
-
             // Load the font for the title text.
             bigFont = new Font(Content.Load<SpriteFont>("fonts/big"));
 
             // Load the sound effect to play when ui actions occur.
             clickSoundEffect = Core.Content.Load<SoundEffect>("audio/click");
 
-            atlas = TextureAtlas.FromFile(Core.Content, "textures/atlas.xml") ;
+            atlas = TextureAtlas.FromFile(Core.Content, "textures/atlas.xml");
         }
 
         public override void Update(GameTime gameTime)
@@ -222,7 +209,7 @@ namespace PingPong.Scenes
         {
             Core.GraphicsDevice.Clear(Color.Gray * 0.25f);
 
-            
+
             base.Draw(gameTime);
             if (titleScreenButtonsPanel.IsVisible)
             {
