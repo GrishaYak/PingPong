@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGameGum.GueDeriving;
 using MonoGameLib.Graphics;
 using static MonoGameLib.Text.TextInstance;
-using static PingPong.Window;
+using static PingPong.UI.Preferences.Button;
 
 namespace PingPong.UI;
 
@@ -21,10 +21,9 @@ public class MyButton : Button
     /// <summary>
     /// A scale that will be used on text when initializing new button 
     /// </summary>
-    public static float TextScale { get; set; } = 0.25f;
+    public static float TextScale { get; set; } = 1f;
     public static float SizeMultiplyer {get; set;} = 1f;
     private readonly float curSizeMultiplyer;
-    public float TextIndent {get;set;} = BufferMultiplyer * 4;
 
     private readonly ButtonVisual buttonVisual;
     private readonly string buttonText = "Replace Me";
@@ -44,9 +43,9 @@ public class MyButton : Button
         buttonText = text;
         curSizeMultiplyer = sizeMultiplyer ?? SizeMultiplyer; 
         buttonVisual = (ButtonVisual)Visual;
-        buttonVisual.Height = BufferHeight * 0.095f * curSizeMultiplyer;
+        buttonVisual.Height = Preferences.Button.Height * curSizeMultiplyer;
         buttonVisual.HeightUnits = DimensionUnitType.Absolute;
-        VisualWidth = BufferWidth * 0.15f;
+        VisualWidth = Preferences.Button.Width;
         buttonVisual.WidthUnits = DimensionUnitType.Absolute;
 
         NineSliceRuntime background = buttonVisual.Background;
@@ -63,7 +62,7 @@ public class MyButton : Button
             BottomCoordinate = unfocusedTextureRegion.BottomTextureCoordinate,
             LeftCoordinate = unfocusedTextureRegion.LeftTextureCoordinate,
             RightCoordinate = unfocusedTextureRegion.RightTextureCoordinate,
-            FrameLength = 1.2f,
+            FrameLength = 1f,
             Texture = atlas.Texture // same as unfocusedTextureRegion.Texture
         };
         unfocusedAnimation.Add(unfocusedFrame);
@@ -77,7 +76,7 @@ public class MyButton : Button
             BottomCoordinate = focusedTextureRegion.BottomTextureCoordinate,
             LeftCoordinate = focusedTextureRegion.LeftTextureCoordinate,
             RightCoordinate = focusedTextureRegion.RightTextureCoordinate,
-            FrameLength = 1.2f,
+            FrameLength = 1f,
             Texture = atlas.Texture
         };
         focusedAnimation.Add(focusedFrame);
