@@ -23,7 +23,7 @@ public static class Preferences
     public static class Colors
     {
         public static Color FocusedColor { get; } = Color.White * 0.9f;
-        public static Color UnfocusedColor { get; } = Color.White * 0.7f;
+        public static Color UnfocusedColor { get; } = Color.White * 0.6f;
         public static Color DefaultTextColor { get; } = Color.White;
     }
     public static class Button
@@ -79,6 +79,7 @@ public static class Preferences
             public const float X = BufferWidth * 0.05f;
             public const float Y = BufferHeight * 0.05f;
             public const float FontScale = Font.StandardFontScale * 2f;
+            public static Color Color = Color.White * 0.95f;
 
         }
         public static class Button

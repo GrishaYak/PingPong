@@ -10,6 +10,7 @@ using Gum.Managers;
 using Microsoft.Xna.Framework.Input;
 using MonoGameGum.GueDeriving;
 using MonoGameLib.Graphics;
+using MonoGameLib.Text;
 using static MonoGameLib.Text.TextInstance;
 using static PingPong.UI.Preferences.Button;
 
@@ -23,7 +24,6 @@ public class MyButton : Button
     /// </summary>
     public static float TextScale { get; set; } = StandardFontScale;
     public static float SizeMultiplyer { get; set; } = StandardSizeMultiplyer;
-    private readonly float curSizeMultiplyer;
 
     private readonly ButtonVisual buttonVisual;
     private readonly string buttonText = "Replace Me";
@@ -36,16 +36,18 @@ public class MyButton : Button
     /// <param name="text">Text on the button</param>
     /// <param name="unfocused">Name of the TextureRegion with unfocused button texture</param>
     /// <param name="focused">Name of the TextureRegion with focused button texture</param>
-    public MyButton(TextureAtlas atlas, string customFontFile = null, string text = "Replace Me", float? customTextScale = null, float? sizeMultiplyer = null)
+    public MyButton(TextureAtlas atlas, string fontFile = FontFile, string text = "Replace Me", float? customTextScale = null, float? sizeMultiplyer = null)
     {
         textScale = customTextScale ?? TextScale;
-        fontFile = customFontFile ?? FontFile;
+        this.fontFile = fontFile;
         buttonText = text;
-        curSizeMultiplyer = sizeMultiplyer ?? SizeMultiplyer;
+        var curSizeMultiplyer = sizeMultiplyer ?? SizeMultiplyer;
         buttonVisual = (ButtonVisual)Visual;
         buttonVisual.Height = Preferences.Button.Height * curSizeMultiplyer;
         buttonVisual.HeightUnits = DimensionUnitType.Absolute;
-        VisualWidth = Preferences.Button.Width;
+
+        SetWidth(Preferences.Button.Width, curSizeMultiplyer);
+
         buttonVisual.WidthUnits = DimensionUnitType.Absolute;
 
         NineSliceRuntime background = buttonVisual.Background;
@@ -54,6 +56,7 @@ public class MyButton : Button
         background.Color = Microsoft.Xna.Framework.Color.White;
 
         var unfocusedTextureRegion = atlas.GetRegion(UnfocusedRegion);
+
         var unfocusedAnimation = new AnimationChain();
         unfocusedAnimation.Name = nameof(unfocusedAnimation);
         var unfocusedFrame = new AnimationFrame
@@ -68,6 +71,7 @@ public class MyButton : Button
         unfocusedAnimation.Add(unfocusedFrame);
 
         var focusedTextureRegion = atlas.GetRegion(FocusedRegion);
+
         var focusedAnimation = new AnimationChain();
         unfocusedAnimation.Name = nameof(focusedAnimation);
         var focusedFrame = new AnimationFrame
@@ -101,22 +105,21 @@ public class MyButton : Button
         buttonVisual.RollOn += HandleRollOn;
     }
 
-    public float VisualWidth
+    private void SetWidth(float value, float curSizeMultiplyer)
     {
-        get => buttonVisual.Width; set
+    
+        SetProperties(buttonVisual.TextInstance, fontFile: fontFile);
+        float textWidth = buttonVisual.TextInstance.BitmapFont.MeasureString(buttonText) * textScale;
+        float ratio = 1;
+        if (textWidth > value - TextIndent)
         {
-            SetProperties(buttonVisual.TextInstance, fontFile: fontFile);
-            float textWidth = buttonVisual.TextInstance.BitmapFont.MeasureString(buttonText) * textScale;
-            float ratio = 1;
-            if (textWidth > value - TextIndent)
-            {
-                ratio = (value - TextIndent) / textWidth;
-            }
-
-            buttonVisual.Width = value * curSizeMultiplyer;
-
-            SetProperties(buttonVisual.TextInstance, buttonText, fontFile: fontFile, scale: textScale * ratio * curSizeMultiplyer);
+            ratio = (value - TextIndent) / textWidth;
         }
+
+        buttonVisual.Width = value * curSizeMultiplyer;
+
+        SetProperties(buttonVisual.TextInstance, buttonText, fontFile: fontFile, scale: textScale * ratio * curSizeMultiplyer);
+        
     }
 
     /// <summary>
