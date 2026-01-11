@@ -9,10 +9,11 @@ using MonoGameLib.Graphics;
 using static PingPong.UI.Preferences.SliderWithText;
 using static MonoGameLib.Text.TextInstance;
 using static PingPong.UI.Preferences.UniversalTextures;
+using static PingPong.UI.Preferences.Colors;
 
 namespace PingPong.UI;
 
-public class OptionsSlider : Gum.Forms.Controls.Slider
+public class OptionsSlider : Slider
 {
     private TextRuntime textInstance;
     private ColoredRectangleRuntime rangeSelect;
@@ -25,15 +26,17 @@ public class OptionsSlider : Gum.Forms.Controls.Slider
         get => textInstance.Text;
         set => textInstance.Text = value;
     }
+    public static float TotalHeight {get;} = TotalHeight;
+    public static float TotalWidth {get;} = TotalWidth;
     /// <summary>
     /// Creates a new OptionsSlider instance using graphics from the specified texture atlas.
     /// </summary>
     /// <param name="atlas">The texture atlas containing slider graphics.</param>
     /// <param name="text">The text, that will be placed near the slider.</param>
-    public OptionsSlider(TextureAtlas atlas, string fontFile=null, string text = "Replace Me", Color? textColor = null)
+    public OptionsSlider(TextureAtlas atlas, string fontFile = null, string text = "Replace Me", Color? textColor = null)
     {
         fontFile ??= FontFile;
-        Color colorText = textColor ?? Color.White;
+        Color colorText = textColor ?? DefaultTextColor;
 
         // Create the top-level container for all visual elements
         var topLevelContainer = new ContainerRuntime
@@ -65,21 +68,21 @@ public class OptionsSlider : Gum.Forms.Controls.Slider
         // Create the container for the slider track and decorative elements
         var innerContainer = new ContainerRuntime
         {
-            Height = 13f,
-            Width = 241f,
-            X = 10f,
-            Y = 33f
+            Height = SliderOnly.Height,
+            Width = SliderOnly.Width,
+            X = SliderOnly.X,
+            Y = SliderOnly.Y
         };
 
         topLevelContainer.AddChild(innerContainer);
 
-        TextureRegion innerBackgroundRegion = atlas.GetRegion("transparent");
+        TextureRegion innerBackgroundRegion = atlas.GetRegion(Transparent);
         var innerBackground = innerBackgroundRegion.GetNineSlice();
         innerBackground.Dock(Gum.Wireframe.Dock.Fill);
 
         innerContainer.AddChild(innerBackground);
 
-        TextureRegion offBackgroundRegion = atlas.GetRegion("slider-off");
+        TextureRegion offBackgroundRegion = atlas.GetRegion(LeftSliderRegion);
         // Create the "OFF" side of the slider (left end)
         var offBackground = new NineSliceRuntime();
         offBackground.Dock(Gum.Wireframe.Dock.Left);
@@ -89,12 +92,12 @@ public class OptionsSlider : Gum.Forms.Controls.Slider
         offBackground.TextureLeft = offBackgroundRegion.SourceRectangle.Left;
         offBackground.TextureTop = offBackgroundRegion.SourceRectangle.Top;
         offBackground.TextureWidth = offBackgroundRegion.Width;
-        offBackground.Width = 28f;
+        offBackground.Width = LeftSliderPartWidth;
         offBackground.WidthUnits = DimensionUnitType.Absolute;
         offBackground.Dock(Gum.Wireframe.Dock.Left);
         innerContainer.AddChild(offBackground);
 
-        TextureRegion middleBackgroundRegion = atlas.GetRegion("slider-middle");
+        TextureRegion middleBackgroundRegion = atlas.GetRegion(MiddleSliderRegion);
         // Create the middle track portion of the slider
         var middleBackground = new NineSliceRuntime();
         middleBackground.Dock(Gum.Wireframe.Dock.FillVertically);
@@ -104,13 +107,13 @@ public class OptionsSlider : Gum.Forms.Controls.Slider
         middleBackground.TextureLeft = middleBackgroundRegion.SourceRectangle.Left;
         middleBackground.TextureTop = middleBackgroundRegion.SourceRectangle.Top;
         middleBackground.TextureWidth = middleBackgroundRegion.Width;
-        middleBackground.Width = 179f;
+        middleBackground.Width = MiddleSliderPartWidth;
         middleBackground.WidthUnits = DimensionUnitType.Absolute;
         middleBackground.Dock(Gum.Wireframe.Dock.Left);
-        middleBackground.X = 27f;
+        middleBackground.X = LeftSliderPartWidth;
         innerContainer.AddChild(middleBackground);
 
-        TextureRegion maxBackgroundRegion = atlas.GetRegion("slider-max");
+        TextureRegion maxBackgroundRegion = atlas.GetRegion(RightSliderRegion);
         // Create the "MAX" side of the slider (right end)
         var maxBackground = new NineSliceRuntime
         {
@@ -120,7 +123,7 @@ public class OptionsSlider : Gum.Forms.Controls.Slider
             TextureLeft = maxBackgroundRegion.SourceRectangle.Left,
             TextureTop = maxBackgroundRegion.SourceRectangle.Top,
             TextureWidth = maxBackgroundRegion.Width,
-            Width = 36f,
+            Width = RightSliderPartWidth,
             WidthUnits = DimensionUnitType.Absolute
         };
         maxBackground.Dock(Gum.Wireframe.Dock.Right);
@@ -137,7 +140,7 @@ public class OptionsSlider : Gum.Forms.Controls.Slider
         // Create the fill rectangle that visually displays the current value
         rangeSelect = new ColoredRectangleRuntime();
         rangeSelect.Dock(Gum.Wireframe.Dock.Left);
-        rangeSelect.Width = 90f; // Default to 90% - will be updated by value changes
+        rangeSelect.Width = DefaultSliderValue; // Default to 90% - will be updated by value changes
         rangeSelect.WidthUnits = DimensionUnitType.PercentageOfParent;
         trackInstance.AddChild(rangeSelect);
 
@@ -152,8 +155,8 @@ public class OptionsSlider : Gum.Forms.Controls.Slider
         maxBackground.AddChild(maxText);
 
         // Define colors for focused and unfocused states
-        Color focusedColor = Color.White;
-        Color unfocusedColor = Color.Gray;
+        Color focusedColor = FocusedColor;
+        Color unfocusedColor = UnfocusedColor;
 
         // Create slider state category - Slider.SliderCategoryName is the required name
         var sliderCategory = new StateSaveCategory
@@ -161,8 +164,6 @@ public class OptionsSlider : Gum.Forms.Controls.Slider
             Name = SliderCategoryName
         };
         topLevelContainer.AddCategory(sliderCategory);
-
-        
 
         // Create the enabled (default/unfocused) state
         var enabled = new StateSave
@@ -184,7 +185,7 @@ public class OptionsSlider : Gum.Forms.Controls.Slider
         // Create the focused state
         var focused = new StateSave
         {
-            Name = FrameworkElement.FocusedStateName,
+            Name = FocusedStateName,
             Apply = () =>
                 {
                     // When focused, use white coloring for all elements

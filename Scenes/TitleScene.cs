@@ -86,14 +86,13 @@ namespace PingPong.Scenes
             optionsPanel.IsVisible = false;
             optionsPanel.AddToRoot();
 
-
             var optionsText = new TextRuntime
             {
-                X = BufferWidth / 20,
-                Y = BufferHeight / 20,
+                X = Preferences.OptionsPanel.OptionsText.X,
+                Y = Preferences.OptionsPanel.OptionsText.Y,
                 Text = TextManager.Get("options"),
                 UseCustomFont = true,
-                FontScale = SymbolScreenHeightScale / 10,
+                FontScale = Preferences.OptionsPanel.OptionsText.FontScale,
                 CustomFontFile = Preferences.Font.FontFile,
             };
 
