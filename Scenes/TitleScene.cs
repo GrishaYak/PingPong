@@ -24,8 +24,6 @@ namespace PingPong.Scenes
         private Panel optionsPanel;
         private MyButton optionsButton;
         private MyButton optionsBackButton;
-        private TextureAtlas atlas;
-
         private void CreateTitlePanel()
         {
             TextManager.SetParent("menu");
@@ -39,7 +37,7 @@ namespace PingPong.Scenes
             titleScreenButtonsPanel.Dock(Gum.Wireframe.Dock.Fill);
             titleScreenButtonsPanel.AddToRoot();
 
-            var startButton = new MyButton(atlas, text: TextManager.Get("play"));
+            var startButton = new MyButton(Preferences.Atlas, text: TextManager.Get("play"));
             startButton.Anchor(Gum.Wireframe.Anchor.BottomLeft);
             startButton.Visual.X = BufferWidth * 0.125f;
             startButton.Visual.Y = -BufferHeight * 0.15f;
@@ -47,7 +45,7 @@ namespace PingPong.Scenes
 
             titleScreenButtonsPanel.AddChild(startButton);
 
-            optionsButton = new MyButton(atlas, text: TextManager.Get("options"));
+            optionsButton = new MyButton(Preferences.Atlas, text: TextManager.Get("options"));
             optionsButton.Anchor(Gum.Wireframe.Anchor.BottomRight);
             optionsButton.Visual.X = -BufferWidth * 0.125f;
             optionsButton.Visual.Y = -BufferHeight * 0.15f;
@@ -55,12 +53,14 @@ namespace PingPong.Scenes
             titleScreenButtonsPanel.AddChild(optionsButton);
 
             startButton.IsFocused = true;
+            
         }
         private void HandleStartClicked(object sender, EventArgs e)
         {
             // A UI interaction occurred, play the sound effect
             Core.Audio.PlaySoundEffect(clickSoundEffect);
 
+            System.Console.WriteLine("Starting!");
             // Change to the game scene to start the game.
             Core.ChangeScene(new GameScene());
         }
@@ -71,6 +71,7 @@ namespace PingPong.Scenes
 
             // Set the title panel to be invisible.
             titleScreenButtonsPanel.IsVisible = false;
+            titleScreenButtonsPanel.IsEnabled = false;
 
             // Set the options panel to be visible.
             optionsPanel.IsVisible = true;
@@ -81,6 +82,7 @@ namespace PingPong.Scenes
         private void CreateOptionsPanel()
         {
             TextManager.SetParent("options");
+            
             optionsPanel = new Panel();
             optionsPanel.Dock(Gum.Wireframe.Dock.Fill);
             optionsPanel.IsVisible = false;
@@ -98,36 +100,38 @@ namespace PingPong.Scenes
 
             optionsPanel.AddChild(optionsText);
 
-            var musicSlider = new OptionsSlider(atlas, text: TextManager.Get("music"));
+            var musicSlider = new OptionsSlider(Preferences.Atlas, text: TextManager.Get("music"));
             musicSlider.Name = "MusicSlider";
-            musicSlider.Anchor(Gum.Wireframe.Anchor.Top);
-            musicSlider.Visual.Y = 40;
+            musicSlider.Anchor(Gum.Wireframe.Anchor.TopLeft);
+            musicSlider.Visual.X = Preferences.SliderWithText.TotalX;
+            musicSlider.Visual.Y = Preferences.OptionsPanel.FirstSliderY;
             musicSlider.Minimum = 0;
             musicSlider.Maximum = 1;
             musicSlider.Value = Core.Audio.SongVolume;
-            musicSlider.SmallChange = .1;
-            musicSlider.LargeChange = .2;
+            musicSlider.SmallChange = Preferences.SliderWithText.SmallChange;
+            musicSlider.LargeChange = Preferences.SliderWithText.LargeChange;
             musicSlider.ValueChanged += HandleMusicSliderValueChanged;
             musicSlider.ValueChangeCompleted += HandleMusicSliderValueChangeCompleted;
             optionsPanel.AddChild(musicSlider);
 
-            var sfxSlider = new OptionsSlider(atlas, text: TextManager.Get("sfx"));
+            var sfxSlider = new OptionsSlider(Preferences.Atlas, text: TextManager.Get("sfx"));
             sfxSlider.Name = "SfxSlider";
-            sfxSlider.Anchor(Gum.Wireframe.Anchor.Top);
-            sfxSlider.Visual.Y = 70;
+            sfxSlider.Anchor(Gum.Wireframe.Anchor.TopLeft);
+            sfxSlider.Visual.X = Preferences.SliderWithText.TotalX;
+            sfxSlider.Visual.Y = musicSlider.Visual.Y + Preferences.SliderWithText.StandardIndent;
             sfxSlider.Minimum = 0;
             sfxSlider.Maximum = 1;
             sfxSlider.Value = Core.Audio.SoundEffectVolume;
-            sfxSlider.SmallChange = .1;
-            sfxSlider.LargeChange = .2;
+            sfxSlider.SmallChange = Preferences.SliderWithText.SmallChange;
+            sfxSlider.LargeChange = Preferences.SliderWithText.LargeChange;
             sfxSlider.ValueChanged += HandleSfxSliderChanged;
             sfxSlider.ValueChangeCompleted += HandleSfxSliderChangeCompleted;
             optionsPanel.AddChild(sfxSlider);
 
-            optionsBackButton = new MyButton(atlas, text: TextManager.Get("back"));
+            optionsBackButton = new MyButton(Preferences.Atlas, text: TextManager.Get("back"));
             optionsBackButton.Anchor(Gum.Wireframe.Anchor.BottomRight);
-            optionsBackButton.X = -20f;
-            optionsBackButton.Y = -20f;
+            optionsBackButton.X = Preferences.OptionsPanel.Button.X;
+            optionsBackButton.Y = Preferences.OptionsPanel.Button.Y;
             optionsBackButton.Click += HandleOptionsButtonBack;
             optionsPanel.AddChild(optionsBackButton);
         }
@@ -196,7 +200,7 @@ namespace PingPong.Scenes
             // Load the sound effect to play when ui actions occur.
             clickSoundEffect = Core.Content.Load<SoundEffect>("audio/click");
 
-            atlas = TextureAtlas.FromFile(Core.Content, "textures/atlas.xml");
+            Preferences.Atlas = TextureAtlas.FromFile(Core.Content, "textures/atlas.xml");
         }
 
         public override void Update(GameTime gameTime)

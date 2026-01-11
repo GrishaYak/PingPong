@@ -1,10 +1,14 @@
+using System.Reflection.Metadata;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.Xna.Framework;
+using MonoGameLib.Graphics;
 using static PingPong.Window;
 
 namespace PingPong.UI;
 
 public static class Preferences
 {
+    public static TextureAtlas Atlas;
     public static class Font
     {
         public const string FontFile = "fonts/default.fnt";
@@ -13,11 +17,13 @@ public static class Preferences
     public static class UniversalTextures
     {
         public const string Transparent = "transparent";
+        public const string GreenOutline = "panel-background";
+        public const string RedOutline = "inner-panel-background";
     }
     public static class Colors
     {
         public static Color FocusedColor { get; } = Color.White * 0.9f;
-        public static Color UnfocusedColor { get; } = Color.Gray;
+        public static Color UnfocusedColor { get; } = Color.White * 0.7f;
         public static Color DefaultTextColor { get; } = Color.White;
     }
     public static class Button
@@ -33,15 +39,19 @@ public static class Preferences
     }
     public static class SliderWithText
     {
-        public const float StandardIndent = TotalHeight + BufferHeight * 0.05f;
+        /// <summary>
+        /// Standard distance from top left angle of one slider to another.
+        /// </summary>
+        public const float StandardIndent = TotalHeight + BufferHeight * 0.04f;
+        public const float TotalX = OptionsPanel.OptionsText.X;
         public const float TotalWidth = 0.7f * BufferWidth;
-        public const float TotalHeight = 0.35f * BufferHeight;
+        public const float TotalHeight = FontScale * FontRatio + SliderOnly.Height;
         public const float TextX = 0;
         public const float TextY = 0;
         public static class SliderOnly
         {
             public const float Width = TotalWidth;
-            public const float Height = TotalHeight * 0.65f;
+            public const float Height = BufferHeight * 0.05f;
             public const float X = 0f;
             public const float Y = FontScale * FontRatio + 0.01f * BufferHeight;
 
@@ -51,13 +61,15 @@ public static class Preferences
         public const string RightSliderRegion = "slider-max";
         public const float FontScale = Font.StandardFontScale * 1.05f;
         public const string FontFile = Font.FontFile;
-        public const float LeftSliderPartWidth = BufferWidth * 0.09f;
+        public const float LeftSliderPartWidth = BufferWidth * 0.01f;
         public const float RightSliderPartWidth = LeftSliderPartWidth;
         public const float MiddleSliderPartWidth = SliderOnly.Width - LeftSliderPartWidth - RightSliderPartWidth;
         /// <summary>
         /// Value of slider in percents.
         /// </summary>
         public const float DefaultSliderValue = 100f;
+        public const double SmallChange = .05;
+        public const double LargeChange = .1;
     }
 
     public static class OptionsPanel
@@ -69,5 +81,11 @@ public static class Preferences
             public const float FontScale = Font.StandardFontScale * 2f;
 
         }
+        public static class Button
+        {
+            public const float X = -0.02f * BufferWidth;
+            public const float Y = X;
+        }
+        public const float FirstSliderY = OptionsText.Y + OptionsText.FontScale * FontRatio + 0.06f * BufferHeight;
     }
 }
