@@ -1,10 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using MonoGameLib;
 using MonoGameLib.Scenes;
 using MonoGameLib.Text;
-using MonoGameGum.GueDeriving;
 using MonoGameGum;
 using Gum.Forms.Controls;
 using System;
@@ -12,10 +10,6 @@ using Microsoft.Xna.Framework.Audio;
 using PingPong.UI;
 using MonoGameLib.Graphics;
 using static PingPong.Window;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using System.Text.Json;
 
 namespace PingPong.Scenes
 {
@@ -25,11 +19,9 @@ namespace PingPong.Scenes
         private Font bigFont;
         private SoundEffect clickSoundEffect;
         private Panel titlePanel;
-        private Panel optionsPanel;
         private MyButton optionsButton;
-        private MyButton optionsBackButton;
         private MyButton startButton;
-        private List<OptionsSlider> Sliders = [];
+        private Settings settings;
         private void CreateTitlePanel()
         {
             TextManager.SetParent("menu");
@@ -75,129 +67,29 @@ namespace PingPong.Scenes
             TitlePanelIsVisible = false;
             // Set the options panel to be visible.
 
-            optionsPanel.IsVisible = true;
+            settings.OptionsPanel.IsVisible = true;
             // Give the back button on the options panel focus.
-            optionsBackButton.IsFocused = true;
+            settings.Buttons["BackButton"].IsFocused = true;
 
         }
-        private void CreateOptionsPanel()
-        {
-            TextManager.SetParent("options");
-
-            optionsPanel = new Panel();
-            optionsPanel.Dock(Gum.Wireframe.Dock.Fill);
-            optionsPanel.IsVisible = false;
-            optionsPanel.AddToRoot();
-
-            var optionsText = new TextRuntime
-            {
-                X = Preferences.OptionsPanel.OptionsText.X,
-                Y = Preferences.OptionsPanel.OptionsText.Y,
-                Text = TextManager.Get("options"),
-                UseCustomFont = true,
-                FontScale = Preferences.OptionsPanel.OptionsText.FontScale,
-                CustomFontFile = Preferences.Font.FontFile,
-                Color = Preferences.OptionsPanel.OptionsText.Color
-            };
-
-            optionsPanel.AddChild(optionsText);
-
-            var musicSlider = new OptionsSlider(Preferences.Atlas, text: TextManager.Get("music"));
-            musicSlider.Name = "MusicSlider";
-            musicSlider.Anchor(Gum.Wireframe.Anchor.TopLeft);
-            musicSlider.Visual.X = Preferences.SliderWithText.TotalX;
-            musicSlider.Visual.Y = Preferences.OptionsPanel.FirstSliderY;
-            musicSlider.Minimum = 0;
-            musicSlider.Maximum = 1;
-            musicSlider.Value = Core.Audio.SongVolume;
-            musicSlider.SmallChange = Preferences.SliderWithText.SmallChange;
-            musicSlider.LargeChange = Preferences.SliderWithText.LargeChange;
-            musicSlider.ValueChanged += HandleMusicSliderValueChanged;
-            musicSlider.ValueChangeCompleted += HandleMusicSliderValueChangeCompleted;
-            optionsPanel.AddChild(musicSlider);
-            Sliders.Add(musicSlider);
-
-            var sfxSlider = new OptionsSlider(Preferences.Atlas, text: TextManager.Get("sfx"));
-            sfxSlider.Name = "SfxSlider";
-            sfxSlider.Anchor(Gum.Wireframe.Anchor.TopLeft);
-            sfxSlider.Visual.X = Preferences.SliderWithText.TotalX;
-            sfxSlider.Visual.Y = musicSlider.Visual.Y + Preferences.SliderWithText.StandardIndent;
-            sfxSlider.Minimum = 0;
-            sfxSlider.Maximum = 1;
-            sfxSlider.Value = Core.Audio.SoundEffectVolume;
-            sfxSlider.SmallChange = Preferences.SliderWithText.SmallChange;
-            sfxSlider.LargeChange = Preferences.SliderWithText.LargeChange;
-            sfxSlider.ValueChanged += HandleSfxSliderChanged;
-            sfxSlider.ValueChangeCompleted += HandleSfxSliderChangeCompleted;
-            optionsPanel.AddChild(sfxSlider);
-            Sliders.Add(sfxSlider);
-
-            var optionsSaveButton = new MyButton(Preferences.Atlas, text: TextManager.Get("save"));
-            optionsSaveButton.Anchor(Gum.Wireframe.Anchor.BottomRight);
-            optionsSaveButton.X = Preferences.OptionsPanel.SaveButton.X;
-            optionsSaveButton.Y = Preferences.OptionsPanel.SaveButton.Y;
-            optionsSaveButton.Click += HandleOptionsSave;
-            optionsPanel.AddChild(optionsSaveButton);
-
-            var optionsDiscardButton = new MyButton(Preferences.Atlas, text: TextManager.Get("discard"));
-            optionsDiscardButton.Anchor(Gum.Wireframe.Anchor.BottomRight);
-            optionsDiscardButton.X = Preferences.OptionsPanel.DiscardButton.X;
-            optionsDiscardButton.Y = Preferences.OptionsPanel.DiscardButton.Y;
-            optionsDiscardButton.Click += HandleOptionsDiscard;
-            optionsPanel.AddChild(optionsDiscardButton);
-
-            optionsBackButton = new MyButton(Preferences.Atlas, text: TextManager.Get("back"));
-            optionsBackButton.Anchor(Gum.Wireframe.Anchor.BottomRight);
-            optionsBackButton.X = Preferences.OptionsPanel.BackButton.X;
-            optionsBackButton.Y = Preferences.OptionsPanel.BackButton.Y;
-            optionsBackButton.Click += HandleOptionsButtonBack;
-            optionsPanel.AddChild(optionsBackButton);
-
-        }
-        private void HandleSfxSliderChanged(object sender, EventArgs args) { var slider = (Slider)sender; Core.Audio.SoundEffectVolume = (float)slider.Value; }
-        private void HandleSfxSliderChangeCompleted(object sender, EventArgs e) { Core.Audio.PlaySoundEffect(clickSoundEffect); }
-        private void HandleMusicSliderValueChanged(object sender, EventArgs args) { var slider = (Slider)sender; Core.Audio.SongVolume = (float)slider.Value; }
-        private void HandleMusicSliderValueChangeCompleted(object sender, EventArgs args) { Core.Audio.PlaySoundEffect(clickSoundEffect); }
         private void HandleOptionsButtonBack(object sender, EventArgs e)
         {
             Core.Audio.PlaySoundEffect(clickSoundEffect);
 
-            optionsPanel.IsVisible = false;
+            settings.OptionsPanel.IsVisible = false;
 
             TitlePanelIsVisible = true;
 
             optionsButton.IsFocused = true;
         }
 
-        private void HandleOptionsSave(object sender, EventArgs e)
-        {
-            Core.Audio.PlaySoundEffect(clickSoundEffect);
-            string prefs = JsonSerializer.Serialize(GetSettings());
-            File.WriteAllText(Preferences.OptionsPanel.PathToSettings, prefs);
-        }
-        private void HandleOptionsDiscard(object sender, EventArgs e)
-        {
-            Core.Audio.MuteAudio();
-            SetSettings(ReadSettings());
-            Core.Audio.UnmuteAudio();
-            Core.Audio.PlaySoundEffect(clickSoundEffect);
-        }
-        private Dictionary<string, double> GetSettings()
-        {
-            Dictionary<string, double> result = [];
-            foreach (var slider in Sliders)
-            {
-                result[slider.Name] = slider.Value;
-            }
-            return result;
-        }
 
         private void InitializeUI()
         {
             GumService.Default.Root.Children.Clear();
 
             CreateTitlePanel();
-            CreateOptionsPanel();
+            settings = new(clickSoundEffect, HandleOptionsButtonBack);
         }
 
         public override void Initialize()
@@ -207,24 +99,11 @@ namespace PingPong.Scenes
             base.Initialize();
 
             InitializeUI();
+            
             startButton.IsFocused = true;
             Core.Audio.MuteAudio();
-            SetSettings(ReadSettings());
+            settings.SetSettings(settings.ReadSettings());
             Core.Audio.UnmuteAudio();
-        }
-
-        private static Dictionary<string, double> ReadSettings()
-        {
-            return JsonSerializer.Deserialize<Dictionary<string, double>>(File.ReadAllText(Preferences.OptionsPanel.PathToSettings));
-        }
-
-        private void SetSettings(Dictionary<string, double> settings)
-        {
-            foreach (var slider in Sliders)
-            {
-                slider.Value = settings[slider.Name];
-
-            }
         }
 
         public override void LoadContent()

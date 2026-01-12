@@ -43,7 +43,7 @@ public static class Preferences
         /// Standard distance from top left angle of one slider to another.
         /// </summary>
         public const float StandardIndent = TotalHeight + BufferHeight * 0.04f;
-        public const float TotalX = OptionsPanel.OptionsText.X;
+        public const float TotalX = Settings.OptionsText.X;
         public const float TotalWidth = 0.7f * BufferWidth;
         public const float TotalHeight = FontScale * FontRatio + SliderOnly.Height;
         public const float TextX = 0;
@@ -72,7 +72,7 @@ public static class Preferences
         public const double LargeChange = .1;
     }
 
-    public static class OptionsPanel
+    public static class Settings
     {
         public static class OptionsText
         {
