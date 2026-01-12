@@ -82,11 +82,22 @@ public static class Preferences
             public static Color Color = Color.White * 0.95f;
 
         }
-        public static class Button
+        public static class BackButton
         {
             public const float X = -0.02f * BufferWidth;
             public const float Y = X;
         }
+        public static class DiscardButton
+        {
+            public const float X = BackButton.X - Button.Width - 0.03f*BufferWidth;
+            public const float Y = BackButton.Y;
+        }
+        public static class SaveButton
+        {
+            public const float X = DiscardButton.X - Button.Width - 0.03f*BufferWidth;
+            public const float Y = BackButton.Y;
+        }
         public const float FirstSliderY = OptionsText.Y + OptionsText.FontScale * FontRatio + 0.06f * BufferHeight;
+        public const string PathToSettings = "Content/settings.json";
     }
 }

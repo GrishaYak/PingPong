@@ -3,6 +3,8 @@
     "options.back":"Back",
     "options.music":"Music",
     "options.sfx":"SFX",
+    "options.save":"Save",
+    "options.discard":"Discard",
     "menu.play":"Play",
     "menu.options":"Options",
     "menu.title":"AeroPong"

@@ -36,6 +36,12 @@
 /processorParam:TextureFormat=Compressed
 /build:fonts/default.spritefont
 
+#begin settings.json
+/copy:settings.json
+
+#begin text/en.json
+/copy:text/en.json
+
 #begin textures/atlas.png
 /importer:TextureImporter
 /processor:TextureProcessor

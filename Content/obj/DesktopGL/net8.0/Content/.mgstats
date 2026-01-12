@@ -3,5 +3,7 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "/home/grishayak/cs/projects/csharp/PingPong/Content/fonts/big.spritefont","/home/grishayak/cs/projects/csharp/PingPong/Content/bin/DesktopGL/Content/fonts/big.xnb","FontDescriptionProcessor","SpriteFontContent",2014,529434,0.3968615
 "/home/grishayak/cs/projects/csharp/PingPong/Content/fonts/default.fnt","/home/grishayak/cs/projects/csharp/PingPong/Content/bin/DesktopGL/Content/fonts/default.fnt","CopyItem","File",11042,11042,0.0002692
 "/home/grishayak/cs/projects/csharp/PingPong/Content/fonts/default.spritefont","/home/grishayak/cs/projects/csharp/PingPong/Content/bin/DesktopGL/Content/fonts/default.xnb","FontDescriptionProcessor","SpriteFontContent",2018,37914,0.0375113
+"/home/grishayak/cs/projects/csharp/PingPong/Content/settings.json","/home/grishayak/cs/projects/csharp/PingPong/Content/bin/DesktopGL/Content/settings.json","CopyItem","File",65,65,0.0003038
+"/home/grishayak/cs/projects/csharp/PingPong/Content/text/en.json","/home/grishayak/cs/projects/csharp/PingPong/Content/bin/DesktopGL/Content/text/en.json","CopyItem","File",260,260,0.0003237
 "/home/grishayak/cs/projects/csharp/PingPong/Content/textures/atlas.png","/home/grishayak/cs/projects/csharp/PingPong/Content/bin/DesktopGL/Content/textures/atlas.xnb","TextureProcessor","Texture2DContent",1935,92757,0.0925119
 "/home/grishayak/cs/projects/csharp/PingPong/Content/textures/atlas.xml","/home/grishayak/cs/projects/csharp/PingPong/Content/bin/DesktopGL/Content/textures/atlas.xml","CopyItem","File",897,897,0.0002005
