@@ -1,5 +1,8 @@
 using System.Reflection.Metadata;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
+using Gum.Content.AnimationChain;
+using Gum.DataTypes;
 using Microsoft.Xna.Framework;
 using MonoGameLib.Graphics;
 using static PingPong.Window;
@@ -48,6 +51,7 @@ public static class Preferences
         public const float TotalHeight = FontScale * FontRatio + SliderOnly.Height;
         public const float TextX = 0;
         public const float TextY = 0;
+        public const float AdditionalTrackHeight = 6f;
         public static class SliderOnly
         {
             public const float Width = TotalWidth;
@@ -55,6 +59,14 @@ public static class Preferences
             public const float X = 0f;
             public const float Y = FontScale * FontRatio + 0.01f * BufferHeight;
 
+        }
+        public static class TrackInstance
+        {
+            public const float Width = -2f;
+            public const DimensionUnitType WidthUnits = DimensionUnitType.RelativeToParent;
+            public const float Height =  -2 * BufferMultiplyer;
+            public const DimensionUnitType HeightUnits = DimensionUnitType.RelativeToParent;
+            public const float X = 1;
         }
         public const string LeftSliderRegion = "slider-off";
         public const string MiddleSliderRegion = "slider-middle";

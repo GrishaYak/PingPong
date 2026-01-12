@@ -128,14 +128,18 @@ public class OptionsSlider : Slider
         // The special name "TrackInstance" is required for Slider functionality
         var trackInstance = new ContainerRuntime { Name = "TrackInstance" };
         trackInstance.Dock(Gum.Wireframe.Dock.Fill);
+        trackInstance.RollOn += HandleRollOn;
+        trackInstance.Width = TrackInstance.Width;
+        trackInstance.WidthUnits = TrackInstance.WidthUnits;
+        trackInstance.X = TrackInstance.X;
         middleBackground.AddChild(trackInstance);
 
         // Create the fill rectangle that visually displays the current value
         rangeSelect = new ColoredRectangleRuntime();
         rangeSelect.Dock(Gum.Wireframe.Dock.Left);
-        rangeSelect.Width = DefaultSliderValue; // Default to 90% - will be updated by value changes
         rangeSelect.WidthUnits = DimensionUnitType.PercentageOfParent;
-        
+        rangeSelect.Height = TrackInstance.Height;
+        rangeSelect.HeightUnits = TrackInstance.HeightUnits;
         trackInstance.AddChild(rangeSelect);
 
         // Define colors for focused and unfocused states
