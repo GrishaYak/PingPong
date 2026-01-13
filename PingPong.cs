@@ -39,9 +39,14 @@ public class PingPong : Core
     protected override void Initialize()
     {
         base.Initialize();
-        TextManager.Load("en");
         InitializeGum();
         ChangeScene(new TitleScene());
+    }
+
+    protected override void LoadContent()
+    {
+        base.LoadContent();
+        TextManager.Load(Core.Content, "en");
     }
 
 

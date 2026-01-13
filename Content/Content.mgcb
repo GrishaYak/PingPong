@@ -19,6 +19,108 @@
 /processorParam:Quality=Best
 /build:audio/click.wav
 
+#begin audio/defeat.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/defeat.wav
+
+#begin audio/gamePlayHARD1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/gamePlayHARD1.mp3
+
+#begin audio/gamePlayHARD2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/gamePlayHARD2.mp3
+
+#begin audio/gamePlayHARD3.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/gamePlayHARD3.mp3
+
+#begin audio/gamePlayHARD4.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/gamePlayHARD4.mp3
+
+#begin audio/gamePlayLITE1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/gamePlayLITE1.mp3
+
+#begin audio/gamePlayLITE2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/gamePlayLITE2.mp3
+
+#begin audio/gamePlayLITE3.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/gamePlayLITE3.mp3
+
+#begin audio/gamePlayMEDIUM1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/gamePlayMEDIUM1.mp3
+
+#begin audio/gamePlayMEDIUM2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/gamePlayMEDIUM2.mp3
+
+#begin audio/gamePlayMEDIUM3.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/gamePlayMEDIUM3.mp3
+
+#begin audio/gamePlayMEDIUM4.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/gamePlayMEDIUM4.mp3
+
+#begin audio/gamePlayMEDIUM5.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/gamePlayMEDIUM5.mp3
+
+#begin audio/mainMenu1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/mainMenu1.mp3
+
+#begin audio/mainMenu2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/mainMenu2.mp3
+
+#begin audio/zvuk5.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/zvuk5.wav
+
+#begin audio/zvuk6.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/zvuk6.wav
+
 #begin fonts/big.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

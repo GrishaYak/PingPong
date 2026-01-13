@@ -110,6 +110,6 @@ public static class Preferences
             public const float Y = BackButton.Y;
         }
         public const float FirstSliderY = OptionsText.Y + OptionsText.FontScale * FontRatio + 0.06f * BufferHeight;
-        public const string PathToSettings = "Content/settings.json";
+        public const string PathToSettings = "settings.json";
     }
 }

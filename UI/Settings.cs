@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using static PingPong.UI.Preferences.Settings;
+using Microsoft.Xna.Framework.Content;
 
 namespace PingPong.UI;
 
@@ -112,10 +113,14 @@ public class Settings
     }
     private void HandleOptionsDiscard(object sender, EventArgs e)
     {
-        Core.Audio.MuteAudio();
-        SetSettings(ReadSettings());
-        Core.Audio.UnmuteAudio();
+        SetToSaved();
         Core.Audio.PlaySoundEffect(clickSoundEffect);
+    }
+    public void SetToSaved()
+    {
+        Core.Audio.MuteAudio();
+        SetSettings(ReadSettings(Core.Content));
+        Core.Audio.UnmuteAudio();
     }
     public Dictionary<string, double> GetSettings()
     {
@@ -127,9 +132,9 @@ public class Settings
         return result;
     }
 
-    public Dictionary<string, double> ReadSettings()
+    public Dictionary<string, double> ReadSettings(ContentManager content)
     {
-        return JsonSerializer.Deserialize<Dictionary<string, double>>(File.ReadAllText(PathToSettings));
+        return JsonSerializer.Deserialize<Dictionary<string, double>>(File.ReadAllText(Path.Combine(content.RootDirectory, PathToSettings)));
     }
 
     public void SetSettings(Dictionary<string, double> settings)

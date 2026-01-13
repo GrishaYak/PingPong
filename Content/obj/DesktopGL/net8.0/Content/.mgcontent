@@ -5,11 +5,45 @@
   <Config />
   <SourceFiles>
     <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/click.wav</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/defeat.wav</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/gamePlayHARD1.mp3</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/gamePlayHARD2.mp3</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/gamePlayHARD3.mp3</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/gamePlayHARD4.mp3</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/gamePlayLITE1.mp3</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/gamePlayLITE2.mp3</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/gamePlayLITE3.mp3</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/gamePlayMEDIUM1.mp3</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/gamePlayMEDIUM2.mp3</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/gamePlayMEDIUM3.mp3</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/gamePlayMEDIUM4.mp3</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/gamePlayMEDIUM5.mp3</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/mainMenu1.mp3</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/mainMenu2.mp3</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/zvuk5.wav</File>
+    <File>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/zvuk6.wav</File>
     <File>/home/grishayak/cs/projects/csharp/PingPong/Content/fonts/big.spritefont</File>
     <File>/home/grishayak/cs/projects/csharp/PingPong/Content/fonts/default.spritefont</File>
     <File>/home/grishayak/cs/projects/csharp/PingPong/Content/textures/atlas.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

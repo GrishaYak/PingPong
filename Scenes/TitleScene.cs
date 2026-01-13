@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Audio;
 using PingPong.UI;
 using MonoGameLib.Graphics;
 using static PingPong.Window;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework.Media;
 
 namespace PingPong.Scenes
 {
@@ -101,11 +103,10 @@ namespace PingPong.Scenes
             InitializeUI();
             
             startButton.IsFocused = true;
-            Core.Audio.MuteAudio();
-            settings.SetSettings(settings.ReadSettings());
-            Core.Audio.UnmuteAudio();
+            settings.SetToSaved();
+            Core.Audio.PlayNextSong();
         }
-
+        
         public override void LoadContent()
         {
             // Load the font for the title text.
@@ -115,6 +116,10 @@ namespace PingPong.Scenes
             clickSoundEffect = Core.Content.Load<SoundEffect>("audio/click");
 
             Preferences.Atlas = TextureAtlas.FromFile(Core.Content, "textures/atlas.xml");
+
+            Song mainMenu1 = Core.Content.Load<Song>("audio/mainMenu1");
+            Song mainMenu2 = Core.Content.Load<Song>("audio/mainMenu2");
+            Core.Audio.PlayList = [mainMenu1, mainMenu2];
         }
 
         public override void Update(GameTime gameTime)

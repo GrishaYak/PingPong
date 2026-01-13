@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>/home/grishayak/cs/projects/csharp/PingPong/Content/audio/click.wav</SourceFile>
-  <SourceTime>2025-12-26T00:41:11.538547+05:00</SourceTime>
+  <SourceTime>2026-01-12T21:53:26.0040822+05:00</SourceTime>
   <DestFile>/home/grishayak/cs/projects/csharp/PingPong/Content/bin/DesktopGL/Content/audio/click.xnb</DestFile>
-  <DestTime>2025-12-26T17:04:21.3747358+05:00</DestTime>
+  <DestTime>2026-01-13T20:49:13.1519908+05:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2025-06-02T15:31:02+05:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>
