@@ -89,7 +89,7 @@ namespace PingPong.Scenes
         private void InitializeUI()
         {
             GumService.Default.Root.Children.Clear();
-
+            
             CreateTitlePanel();
             settings = new(clickSoundEffect, HandleOptionsButtonBack);
         }
@@ -115,10 +115,10 @@ namespace PingPong.Scenes
             // Load the sound effect to play when ui actions occur.
             clickSoundEffect = Core.Content.Load<SoundEffect>("audio/click");
 
-            Preferences.Atlas = TextureAtlas.FromFile(Core.Content, "textures/atlas.xml");
+            Preferences.Atlas = TextureAtlas.FromFile(Content, "textures/atlas.xml");
 
-            Song mainMenu1 = Core.Content.Load<Song>("audio/mainMenu1");
-            Song mainMenu2 = Core.Content.Load<Song>("audio/mainMenu2");
+            Song mainMenu1 = Content.Load<Song>("audio/mainMenu1");
+            Song mainMenu2 = Content.Load<Song>("audio/mainMenu2");
             Core.Audio.PlayList = [mainMenu1, mainMenu2];
         }
 
