@@ -131,7 +131,6 @@ public class OptionsSlider : Slider
         trackInstance.RollOn += HandleRollOn;
         trackInstance.Width = TrackInstance.Width;
         trackInstance.WidthUnits = TrackInstance.WidthUnits;
-        trackInstance.X = TrackInstance.X;
         middleBackground.AddChild(trackInstance);
 
         // Create the fill rectangle that visually displays the current value

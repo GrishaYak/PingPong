@@ -47,7 +47,7 @@ public static class Preferences
         /// </summary>
         public const float StandardIndent = TotalHeight + BufferHeight * 0.04f;
         public const float TotalX = Settings.OptionsText.X;
-        public const float TotalWidth = 0.7f * BufferWidth;
+        public const float TotalWidth = 0.9f * BufferWidth;
         public const float TotalHeight = FontScale * FontRatio + SliderOnly.Height;
         public const float TextX = 0;
         public const float TextY = 0;
@@ -62,11 +62,10 @@ public static class Preferences
         }
         public static class TrackInstance
         {
-            public const float Width = -2f;
+            public const float Width = -2f*BufferMultiplyer;
             public const DimensionUnitType WidthUnits = DimensionUnitType.RelativeToParent;
             public const float Height =  -2 * BufferMultiplyer;
             public const DimensionUnitType HeightUnits = DimensionUnitType.RelativeToParent;
-            public const float X = 1;
         }
         public const string LeftSliderRegion = "slider-off";
         public const string MiddleSliderRegion = "slider-middle";
