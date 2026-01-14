@@ -12,33 +12,16 @@ using MonoGameLib.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using static PingPong.Window;
+using MonoGameLib.Graphics;
+
 
 namespace PingPong.Scenes;
 public class GameScene : Scene
 {
     SpriteFont scoreFont;
     SoundEffect clickSoundEffect;
-    Score score;
-    private class Score
-    {
-        private readonly SpriteFont _font;
-        public Score(SpriteFont font)
-        {
-            _font = font;
-            Value = 0;
-        }
-        private int _value;
-        public int Value {get => _value; set
-            {
-                _value = value;
-                Origin = _font.MeasureString(Value.ToString()) * new Vector2(0.5f, 0f);
-            }
-        }
-        public void AddOne() {Value += 1;}
-        public void Reset() {Value = 0;}
-        public Vector2 Position {get;} = new Vector2(ScreenWidth*0.5f, 0);
-        public Vector2 Origin {get; set;} 
-    }
+    TwoPlayerScore score;
+    Ball ball;
     private void InitializeUI()
     {
         GumService.Default.Root.Children.Clear();
@@ -46,22 +29,37 @@ public class GameScene : Scene
     }
     public override void Initialize()
     {
+        ball = new();
+        ball.OutOfScreen += OnBallOutOfScreen;
         base.Initialize();
         InitializeUI();
+        ball.Start();
     }
 
     public override void LoadContent()
     {
         scoreFont = Content.Load<SpriteFont>("fonts/big");
         clickSoundEffect = Core.Content.Load<SoundEffect>("audio/click");
+        ball.LoadTexture(Preferences.Atlas.GetRegion("ball"));
     }
     public override void Draw(GameTime gameTime)
     {
-        Core.GraphicsDevice.Clear(Color.Gray * 0.25f);
-        Core.SpriteBatch.Begin();
-        Core.SpriteBatch.DrawString(scoreFont, $"{score.Value}", score.Position, Color.White, 0.0f, score.Origin, 1f, SpriteEffects.None, 0.0f );
+        Core.GraphicsDevice.Clear(Preferences.Colors.BackgroundColor);
+        Core.SpriteBatch.PixelBegin();
+        score.Draw(Core.SpriteBatch);
+        ball.Draw(Core.SpriteBatch);
         Core.SpriteBatch.End();
         GumService.Default.Draw();
+    }
+    public override void Update(GameTime gameTime)
+    {
+        base.Update(gameTime);
+        ball.Update(gameTime);
+    }
+    private void OnBallOutOfScreen()
+    {
+        ball.Reset();
+        ball.Start();
     }
 }
 

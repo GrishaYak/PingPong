@@ -1,3 +1,5 @@
+using Microsoft.Xna.Framework;
+
 namespace PingPong;
 
 public static class Window
@@ -26,5 +28,5 @@ public static class Window
     {
         return fontScale * FontRatio;
     }
-
+    public static Vector2 Screen = new Vector2(ScreenWidth, ScreenHeight) * 0.5f;
 }

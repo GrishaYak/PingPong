@@ -115,7 +115,7 @@ namespace PingPong.Scenes
             // Load the sound effect to play when ui actions occur.
             clickSoundEffect = Core.Content.Load<SoundEffect>("audio/click");
 
-            Preferences.Atlas = TextureAtlas.FromFile(Content, "textures/atlas.xml");
+            Preferences.Atlas = TextureAtlas.FromFile(Core.Content, "textures/atlas.xml");
 
             Song mainMenu1 = Content.Load<Song>("audio/mainMenu1");
             Song mainMenu2 = Content.Load<Song>("audio/mainMenu2");
@@ -129,7 +129,7 @@ namespace PingPong.Scenes
 
         public override void Draw(GameTime gameTime)
         {
-            Core.GraphicsDevice.Clear(Color.Gray * 0.25f);
+            Core.GraphicsDevice.Clear(Preferences.Colors.BackgroundColor);
 
             base.Draw(gameTime);
             DrawLabel();
@@ -141,7 +141,7 @@ namespace PingPong.Scenes
             if (TitlePanelIsVisible)
             {
                 // Begin the sprite batch to prepare for rendering.
-                Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+                Core.SpriteBatch.PixelBegin();
 
                 bigFont.Draw(Core.SpriteBatch);
 

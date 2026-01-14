@@ -28,6 +28,7 @@ public static class Preferences
         public static Color FocusedColor { get; } = Color.White * 0.9f;
         public static Color UnfocusedColor { get; } = Color.White * 0.6f;
         public static Color DefaultTextColor { get; } = Color.White;
+        public static Color BackgroundColor {get;} = Color.Gray * 0.25f;
     }
     public static class Button
     {
