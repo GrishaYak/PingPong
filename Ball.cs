@@ -12,7 +12,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 namespace PingPong;
 
-public class Ball : DynamicObject
+public class Ball : PhysicalObject
 {
     private enum Surface { Top, Bottom }
     public float Radius { get; set; }
